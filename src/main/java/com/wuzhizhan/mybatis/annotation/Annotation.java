@@ -23,6 +23,7 @@ import java.util.Set;
 public class Annotation implements Cloneable {
 
     public static final Annotation PARAM = new Annotation("@Param", "org.apache.ibatis.annotations.Param");
+    public static final Annotation JPA_PARAM = new Annotation("@Param", "org.springframework.data.repository.query.Param");
 
     public static final Annotation SELECT = new Annotation("@Select", "org.apache.ibatis.annotations.Select");
 
