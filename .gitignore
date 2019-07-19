@@ -1,10 +1,28 @@
+.gradle
+/build/
+.svn
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+target
+
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
-*.jar
-log.roo
-.idea/
-out/
-.DS_Store
-.gradle/
-gradle/
+*.ipr
+out
+classes
+
+### NetBeans ###
+nbproject/private/
 build/
-out/
+nbbuild/
+nbdist/
+.nb-gradle/
+/.gradletasknamecache
