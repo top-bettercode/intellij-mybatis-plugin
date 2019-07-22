@@ -1,50 +1,48 @@
 package com.wuzhizhan.mybatis.alias;
 
 import com.google.common.collect.ImmutableSet;
-
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.wuzhizhan.mybatis.util.JavaUtils;
-
+import java.util.Set;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Set;
 
 /**
  * @author yanglin
  */
 public class InnerAliasResolver extends AliasResolver {
 
-    private final Set<AliasDesc> innerAliasDescs = ImmutableSet.of(
-            AliasDesc.create(JavaUtils.findClazz(project, "java.lang.String").get(), "string"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Byte").get(), "byte"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Long").get(), "long"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Short").get(), "short"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Integer").get(), "int"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Integer").get(), "integer"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Double").get(), "double"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Float").get(), "float"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Boolean").get(), "boolean"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.util.Date").get(), "date"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.math.BigDecimal").get(), "decimal"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Object").get(), "object"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.util.Map").get(), "map"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.util.HashMap").get(), "hashmap"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.util.List").get(), "list"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.util.ArrayList").get(), "arraylist"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.util.Collection").get(), "collection"),
-            AliasDesc.create(JavaUtils.findClazz(project, "java.util.Iterator").get(), "iterator")
-    );
+  private final Set<AliasDesc> innerAliasDescs = ImmutableSet.of(
+      AliasDesc.create(JavaUtils.findClazz(project, "java.lang.String").orNull(), "string"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Byte").orNull(), "byte"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Long").orNull(), "long"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Short").orNull(), "short"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Integer").orNull(), "int"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Integer").orNull(), "integer"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Double").orNull(), "double"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Float").orNull(), "float"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Boolean").orNull(), "boolean"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.util.Date").orNull(), "date"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.math.BigDecimal").orNull(), "decimal"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.lang.Object").orNull(), "object"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.util.Map").orNull(), "map"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.util.HashMap").orNull(), "hashmap"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.util.List").orNull(), "list"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.util.ArrayList").orNull(), "arraylist"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.util.Collection").orNull(), "collection"),
+      AliasDesc.create(JavaUtils.findClazz(project, "java.util.Iterator").orNull(), "iterator")
+  );
 
-    public InnerAliasResolver(Project project) {
-        super(project);
-    }
+  public InnerAliasResolver(Project project) {
+    super(project);
+    innerAliasDescs.remove(null);
+  }
 
-    @NotNull
-    @Override
-    public Set<AliasDesc> getClassAliasDescriptions(@Nullable PsiElement element) {
-        return innerAliasDescs;
-    }
+  @NotNull
+  @Override
+  public Set<AliasDesc> getClassAliasDescriptions(@Nullable PsiElement element) {
+    return innerAliasDescs;
+  }
 
 }
