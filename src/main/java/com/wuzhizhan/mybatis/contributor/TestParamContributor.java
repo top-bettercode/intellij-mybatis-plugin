@@ -27,14 +27,13 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ProcessingContext;
 import com.wuzhizhan.mybatis.annotation.Annotation;
 import com.wuzhizhan.mybatis.dom.model.IdDomElement;
+import com.wuzhizhan.mybatis.setting.MybatisSetting;
 import com.wuzhizhan.mybatis.util.Icons;
 import com.wuzhizhan.mybatis.util.JavaUtils;
 import com.wuzhizhan.mybatis.util.MapperUtils;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -78,16 +77,6 @@ public class TestParamContributor extends CompletionContributor {
     Notifications.Bus.notify(notification, project);
   }
 
-  static Set<String> IGNORE_TYPES = new HashSet<>();
-
-  static {
-    IGNORE_TYPES.add("org.springframework.data.domain.Pageable");
-    IGNORE_TYPES.add("org.springframework.data.domain.Sort");
-    IGNORE_TYPES.add("org.apache.ibatis.session.RowBounds");
-    IGNORE_TYPES.add("com.github.pagehelper.PageRowBounds");
-    IGNORE_TYPES.add("com.baomidou.mybatisplus.plugins.pagination.Pagination");
-    IGNORE_TYPES.add("com.baomidou.mybatisplus.plugins.Page");
-  }
 
   static void addElementForPsiParameter(
       @NotNull final Project project,
@@ -110,7 +99,8 @@ public class TestParamContributor extends CompletionContributor {
     // named as param1, param2, etc. I'll check if the @Param annotation [value] is present
     // and eventually I'll use its text.
     List<PsiParameter> params = Arrays.stream(parameters)
-        .filter(p -> !IGNORE_TYPES.contains(p.getType().getCanonicalText(false))).collect(
+        .filter(p -> !MybatisSetting.getInstance().getIgnoreParamTypes()
+            .contains(p.getType().getCanonicalText(false))).collect(
             Collectors.toList());
 
     int size = params.size();
