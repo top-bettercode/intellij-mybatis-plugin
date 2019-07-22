@@ -85,6 +85,8 @@ public class TestParamContributor extends CompletionContributor {
     IGNORE_TYPES.add("org.springframework.data.domain.Sort");
     IGNORE_TYPES.add("org.apache.ibatis.session.RowBounds");
     IGNORE_TYPES.add("com.github.pagehelper.PageRowBounds");
+    IGNORE_TYPES.add("com.baomidou.mybatisplus.plugins.pagination.Pagination");
+    IGNORE_TYPES.add("com.baomidou.mybatisplus.plugins.Page");
   }
 
   static void addElementForPsiParameter(
