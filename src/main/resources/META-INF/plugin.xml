@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>cn.wuzhizhan.plugin.mybatis</id>
+    <id>cn.bestwu.plugin.mybatis</id>
     <name>Free MyBatis plugin</name>
     <vendor email="wuzhizhan@wuzhizhan.cn" url="https://github.com/wuzhizhan">wuzhizhan</vendor>
 
