@@ -1,6 +1,5 @@
 package com.wuzhizhan.mybatis.contributor;
 
-import com.google.common.base.Optional;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
@@ -99,8 +98,14 @@ public class TestParamContributor extends CompletionContributor {
     // named as param1, param2, etc. I'll check if the @Param annotation [value] is present
     // and eventually I'll use its text.
     List<PsiParameter> params = Arrays.stream(parameters)
-        .filter(p -> !MybatisSetting.getInstance().getIgnoreParamTypes()
-            .contains(p.getType().getCanonicalText(false))).collect(
+        .filter(p -> {
+          String canonicalText = p.getType().getCanonicalText(false);
+          if (canonicalText.endsWith(">")) {
+            canonicalText = canonicalText.substring(0, canonicalText.indexOf('<'));
+          }
+          return !MybatisSetting.getInstance().getIgnoreParamTypes()
+              .contains(canonicalText);
+        }).collect(
             Collectors.toList());
 
     int size = params.size();
@@ -115,13 +120,11 @@ public class TestParamContributor extends CompletionContributor {
         int index = 0;
         int total = size;
         for (PsiParameter parameter : params) {
-          Optional<String> value = JavaUtils
-              .getAnnotationValueText(parameter, Annotation.JPA_PARAM);
-          if (!value.isPresent()) {
-            value = JavaUtils.getAnnotationValueText(parameter, Annotation.PARAM);
-          }
           String qualifiedName = parameter.getType().getCanonicalText(false);
-          String content = value.isPresent() ? value.get() : parameter.getName();
+          String content = JavaUtils
+              .getAnnotationValueText(parameter, Annotation.JPA_PARAM)
+              .or(JavaUtils.getAnnotationValueText(parameter, Annotation.PARAM))
+              .or(parameter.getName());
           result.addElement(
               buildLookupElementWithIcon(content,
                   qualifiedName, index++));
