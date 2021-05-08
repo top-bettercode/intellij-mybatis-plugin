@@ -1,18 +1,16 @@
 package com.wuzhizhan.mybatis.reference;
 
 import com.google.common.base.Optional;
-
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceBase;
+import com.intellij.psi.util.PropertyUtil;
 import com.intellij.psi.xml.XmlAttributeValue;
 import com.wuzhizhan.mybatis.dom.MapperBacktrackingUtils;
 import com.wuzhizhan.mybatis.service.JavaService;
-import com.wuzhizhan.mybatis.util.JavaUtils;
 import com.wuzhizhan.mybatis.util.MybatisConstants;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +41,7 @@ public class ContextPsiFieldReference extends PsiReferenceBase<XmlAttributeValue
     @Override
     public Object[] getVariants() {
         Optional<PsiClass> clazz = getTargetClazz();
-        return clazz.isPresent() ? JavaUtils.findSettablePsiFields(clazz.get()) : PsiReference.EMPTY_ARRAY;
+        return clazz.isPresent() ? PropertyUtil.getAllProperties(clazz.get(),false,true).values().stream().map(PropertyUtil::getPropertyName).toArray() : PsiReference.EMPTY_ARRAY;
     }
 
     @SuppressWarnings("unchecked")
