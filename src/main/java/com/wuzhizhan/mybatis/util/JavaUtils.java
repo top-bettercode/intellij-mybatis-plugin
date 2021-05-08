@@ -8,6 +8,7 @@ import com.intellij.psi.util.PropertyUtil;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.wuzhizhan.mybatis.annotation.Annotation;
 import com.wuzhizhan.mybatis.dom.model.IdDomElement;
+import java.util.Map;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +37,15 @@ public final class JavaUtils {
             @Nullable final String propertyName) {
         final PsiField field = PropertyUtil.findPropertyField(clazz, propertyName, false);
         return field != null ? Optional.of(field) : Optional.absent();
+    }
+
+    @NotNull
+    public static Optional<PsiMethod> findProperty(
+        @NotNull final PsiClass clazz,
+        @Nullable final String propertyName) {
+        Map<String, PsiMethod> allProperties = PropertyUtil.getAllProperties(clazz, false, true);
+        PsiMethod psiMethod = allProperties.get(propertyName);
+        return psiMethod != null ? Optional.of(psiMethod) : Optional.absent();
     }
 
     @NotNull

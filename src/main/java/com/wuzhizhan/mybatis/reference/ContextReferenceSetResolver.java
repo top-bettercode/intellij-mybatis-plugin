@@ -46,7 +46,7 @@ public abstract class ContextReferenceSetResolver<F extends PsiElement, K extend
             if (text.contains(" ")) {
                 return Optional.absent();
             }
-            current = resolve(current.get(), text);
+            current = resolveNext(current.get(), text);
             ind++;
         }
         return current;
@@ -63,7 +63,7 @@ public abstract class ContextReferenceSetResolver<F extends PsiElement, K extend
     public abstract String getText();
 
     @NotNull
-    public abstract Optional<K> resolve(@NotNull K current, @NotNull String text);
+    public abstract Optional<K> resolveNext(@NotNull K current, @NotNull String text);
 
     public F getElement() {
         return element;
