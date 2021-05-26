@@ -16,9 +16,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 intellij {
-    version = 'IU-2018.1'
+    version = 'IU-2020.2'
     pluginName = 'free-idea-mybatis'
-    plugins = ['coverage','Spring','DatabaseTools']
+    plugins = ['java', 'coverage', 'Spring', 'DatabaseTools']
     intellij.updateSinceUntilBuild false
 }
 patchPluginXml {

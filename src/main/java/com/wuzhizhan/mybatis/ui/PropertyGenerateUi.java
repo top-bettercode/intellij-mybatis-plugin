@@ -9,11 +9,27 @@ import com.intellij.database.util.DasUtil;
 import com.intellij.database.util.DbUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.ListCellRendererWrapper;
+import com.intellij.ui.SimpleListCellRenderer;
 import com.intellij.util.containers.JBIterable;
-
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.table.AbstractTableModel;
-import java.awt.event.*;
 
 public class PropertyGenerateUi extends JDialog {
     private JPanel contentPane;
@@ -126,7 +142,7 @@ public class PropertyGenerateUi extends JDialog {
         DbDataSource[] dbDataSources = dataSources.toList().toArray(new DbDataSource[0]);
         dbComboBox.setModel(new DefaultComboBoxModel(dbDataSources));
 
-        dbComboBox.setRenderer(new ListCellRendererWrapper() {
+        dbComboBox.setRenderer(new SimpleListCellRenderer() {
             @Override
             public void customize(JList list, Object value, int index, boolean selected, boolean hasFocus) {
                 setText(((DbDataSource) value).getName());

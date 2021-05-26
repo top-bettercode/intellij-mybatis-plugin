@@ -25,7 +25,8 @@ import javax.swing.*;
 public abstract class SimpleLineMarkerProvider<F extends PsiElement, T> extends MarkerProviderAdaptor {
 
     @Override
-    public void collectSlowLineMarkers(@NotNull List<PsiElement> elements, @NotNull Collection<LineMarkerInfo> result) {
+    public void collectSlowLineMarkers(@NotNull List<? extends PsiElement> elements,
+        @NotNull Collection<? super LineMarkerInfo<?>> result) {
     }
 
     @SuppressWarnings("unchecked")

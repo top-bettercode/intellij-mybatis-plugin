@@ -21,7 +21,8 @@ public class MapperDefinitionSearch extends QueryExecutorBase<XmlElement, PsiEle
     }
 
     @Override
-    public void processQuery(@NotNull PsiElement element, @NotNull final Processor<XmlElement> consumer) {
+    public void processQuery(@NotNull PsiElement element,
+        @NotNull Processor<? super XmlElement> consumer) {
 
         if (!(element instanceof PsiTypeParameterListOwner)) return;
 
