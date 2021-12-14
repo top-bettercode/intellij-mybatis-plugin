@@ -1,14 +1,14 @@
 plugins {
-    id 'org.jetbrains.intellij' version '0.4.9'
+    id 'org.jetbrains.intellij' version '1.3.0'
 }
 
 group = 'cn.wuzhizhan.idea.mybatis'
 version = '2019.07.19'
 
 apply plugin: 'java'
-sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -16,13 +16,13 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 intellij {
-    version = 'IU-2020.2'
+    version = 'IU-2021.2.3'
     pluginName = 'free-idea-mybatis'
     plugins = ['java', 'coverage', 'Spring', 'DatabaseTools']
-    intellij.updateSinceUntilBuild false
+    intellij.updateSinceUntilBuild = false
 }
 patchPluginXml {
-    changeNotes """
+    changeNotes = """
     <h4>2019.06.06</h4>
       <ul>
         <li>Fix NPE in AliasFacade.findPsiClass(..)</li>
