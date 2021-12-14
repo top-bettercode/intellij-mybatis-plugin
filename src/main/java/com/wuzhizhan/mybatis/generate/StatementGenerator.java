@@ -80,11 +80,9 @@ public abstract class StatementGenerator {
     }
 
     private static void doGenerate(@NotNull final StatementGenerator generator, @NotNull final PsiMethod method) {
-        (new WriteCommandAction.Simple(method.getProject(), new PsiFile[]{method.getContainingFile()}) {
-            protected void run() throws Throwable {
+        WriteCommandAction.writeCommandAction(method.getProject(), new PsiFile[]{method.getContainingFile()}).run( ()->{
                 generator.execute(method);
-            }
-        }).execute();
+        });
     }
 
     public static void applyGenerate(@Nullable final PsiMethod method) {
@@ -95,20 +93,17 @@ public abstract class StatementGenerator {
             generators[0].execute(method);
         } else {
             JBPopupFactory.getInstance().createListPopup(
-                    new BaseListPopupStep<StatementGenerator>("[ Statement type for method: " + method.getName() + "]", generators) {
-                        @Override
-                        public PopupStep<StatementGenerator> onChosen(StatementGenerator selectedValue, boolean finalChoice) {
-                            return doFinalStep(new Runnable() {
-                                public void run() {
-                                    WriteCommandAction.runWriteCommandAction(project, new Runnable() {
-                                        public void run() {
-                                            StatementGenerator.doGenerate(selectedValue, method);
-                                        }
-                                    });
-                                }
-                            });
-                        }
+                new BaseListPopupStep<>("[ Statement type for method: " + method.getName() + "]",
+                    generators) {
+                    @Override
+                    public PopupStep<StatementGenerator> onChosen(StatementGenerator selectedValue,
+                        boolean finalChoice) {
+                        //noinspection unchecked
+                        return (PopupStep<StatementGenerator>) doFinalStep(
+                            () -> WriteCommandAction.runWriteCommandAction(project,
+                                () -> StatementGenerator.doGenerate(selectedValue, method)));
                     }
+                }
             ).showInFocusCenter();
         }
     }

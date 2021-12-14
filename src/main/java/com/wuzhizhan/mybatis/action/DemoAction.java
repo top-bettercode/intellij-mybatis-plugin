@@ -11,17 +11,20 @@ import com.intellij.database.psi.DbTable;
 import com.intellij.database.util.DasUtil;
 import com.intellij.database.util.DbUtil;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.*;
+import com.intellij.psi.JavaPsiFacade;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElementFactory;
+import com.intellij.psi.PsiField;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiType;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.util.containers.JBIterable;
 import com.wuzhizhan.mybatis.ui.PropertyGenerateUi;
-
 import java.util.ArrayList;
 import java.util.List;
 

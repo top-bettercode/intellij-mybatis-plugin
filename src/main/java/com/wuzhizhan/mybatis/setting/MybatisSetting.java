@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
  */
 @State(
     name = "MybatisSettings",
-    storages = @Storage(file = "$APP_CONFIG$/mybatis.xml"))
+    storages = @Storage("$APP_CONFIG$/mybatis.xml"))
 public class MybatisSetting implements PersistentStateComponent<Element> {
 
   private GenerateModel statementGenerateModel;

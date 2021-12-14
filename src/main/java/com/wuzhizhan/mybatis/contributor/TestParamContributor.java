@@ -10,8 +10,6 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.lang.jvm.JvmModifier;
 import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationDisplayType;
-import com.intellij.notification.NotificationGroup;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.project.Project;
@@ -52,7 +50,7 @@ public class TestParamContributor extends CompletionContributor {
         XmlPatterns.psiElement()
             .inside(XmlPatterns.xmlAttributeValue()
                 .inside(XmlPatterns.xmlAttribute().withName("test"))),
-        new CompletionProvider<CompletionParameters>() {
+        new CompletionProvider<>() {
           @Override
           protected void addCompletions(
               @NotNull final CompletionParameters parameters,
@@ -68,11 +66,8 @@ public class TestParamContributor extends CompletionContributor {
   }
 
   static void show(Project project, String content) {
-    Notification notification = new NotificationGroup(
-        "GradleDependencies",
-        NotificationDisplayType.NONE,
-        true
-    ).createNotification("mybatis", content, NotificationType.INFORMATION, null);
+    Notification notification = new Notification(
+        "GradleDependencies", "Mybatis", content, NotificationType.INFORMATION);
     Notifications.Bus.notify(notification, project);
   }
 
