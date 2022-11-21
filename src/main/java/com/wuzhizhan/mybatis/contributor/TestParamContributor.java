@@ -50,7 +50,7 @@ public class TestParamContributor extends CompletionContributor {
         XmlPatterns.psiElement()
             .inside(XmlPatterns.xmlAttributeValue()
                 .inside(XmlPatterns.xmlAttribute().withName("test"))),
-        new CompletionProvider<>() {
+        new CompletionProvider<CompletionParameters>() {
           @Override
           protected void addCompletions(
               @NotNull final CompletionParameters parameters,
