@@ -23,13 +23,16 @@ intellij {
 }
 patchPluginXml {
     changeNotes = """
-    <h4>2019.06.06</h4>
+    <h4>2019.07.19</h4>
       <ul>
-        <li>Fix NPE in AliasFacade.findPsiClass(..)</li>
+        <li>support @org.springframework.data.repository.query.Param</li>
       </ul>
      """
 }
-
+publishPlugin {
+    token = project.findProperty("intellij.publish.token")
+    channels = ["stable"]
+}
 java {
     sourceCompatibility(JavaVersion.VERSION_1_8)
     targetCompatibility(JavaVersion.VERSION_1_8)
