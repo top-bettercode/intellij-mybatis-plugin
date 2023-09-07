@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'cn.wuzhizhan.idea.mybatis'
-version = '2019.07.19'
+version = '2023.09.07'
 
 apply plugin: 'java'
 
