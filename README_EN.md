@@ -23,6 +23,3 @@ free-idea-mybatis is an enchange plugin for idea to supoort mybatis,here is the 
 - ![](https://raw.githubusercontent.com/wuzhizhan/free-idea-mybatis/master/doc/img/to_code.jpg)
 
 
-## TODO
-- generate bean accourding to database field
-- generate CURD code
