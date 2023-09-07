@@ -1,6 +1,6 @@
 <idea-plugin>
   <id>cn.bestwu.plugin.mybatis</id>
-  <name>Free MyBatis plugin</name>
+  <name>Free MyBatis Extension</name>
   <vendor email="piterwu@outlook.com" url="https://github.com/top-bettercode">piterwu</vendor>
 
   <description><![CDATA[
