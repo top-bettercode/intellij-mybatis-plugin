@@ -4,6 +4,8 @@ import com.intellij.util.xml.DomElement;
 import com.intellij.util.xml.highlighting.BasicDomElementsInspection;
 import com.intellij.util.xml.highlighting.DomElementAnnotationHolder;
 import com.intellij.util.xml.highlighting.DomHighlightingHelper;
+import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author yanglin
@@ -19,4 +21,8 @@ public class MapperXmlInspection extends BasicDomElementsInspection<DomElement> 
         super.checkDomElement(element, holder, helper);
     }
 
+    @Override
+    public @Nullable @Nls String getStaticDescription() {
+        return "Mybatis Mapper XML Inspection";
+    }
 }

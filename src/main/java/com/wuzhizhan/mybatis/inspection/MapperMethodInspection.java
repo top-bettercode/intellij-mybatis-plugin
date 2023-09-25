@@ -15,6 +15,7 @@ import com.wuzhizhan.mybatis.generate.StatementGenerator;
 import com.wuzhizhan.mybatis.locator.MapperLocator;
 import com.wuzhizhan.mybatis.service.JavaService;
 import com.wuzhizhan.mybatis.util.JavaUtils;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -130,5 +131,10 @@ public class MapperMethodInspection extends MapperInspection {
         }
 
         return Optional.absent();
+    }
+
+    @Override
+    public @Nullable @Nls String getStaticDescription() {
+        return "Mybatis Mapper XML Inspection";
     }
 }
